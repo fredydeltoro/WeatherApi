@@ -1,24 +1,13 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Api excercise to Reservamos.com
 
-Things you may want to cover:
+## Setup
 
-* Ruby version
+1. `bundle install`
+2. `rails server`
 
-* System dependencies
+## Docker Setup(live reload)
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+1. `docker-compose build`
+2. `docker-compose up`
