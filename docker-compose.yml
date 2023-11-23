@@ -1,0 +1,14 @@
+version: "3.8"
+
+services:
+  web:
+    build: .
+    ports:
+      - "3000:3000"
+    image: docker-rails
+    container_name: docker-rails-web
+    environment:
+      RAILS_ENV: development
+      DATABASE_URL: "sqlite3:/var/www/db/development.sqlite3" # SQLite database URL for development
+    volumes:
+      - ./:/var/www # Mount the local code as a volume
