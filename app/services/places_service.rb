@@ -16,8 +16,8 @@ module PlacesService
     # Array to collect results in parallel
     map_places = Concurrent::Array.new
 
-    # Make requests in parallel
-    promises = body.map do |place|
+    # Make requests in parallel and filtert to just get cities
+    promises = body.select {|place| place['result_type'] == 'city'}.map do |place|
       Concurrent::Promise.execute do
         daily_temp = WeatherService.get_temperature_by_cordinates(place['lat'], place['long'])
         place['daily_temp'] = daily_temp
