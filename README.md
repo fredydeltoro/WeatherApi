@@ -11,3 +11,4 @@ Api excercise to Reservamos.com
 
 1. `docker-compose build`
 2. `docker-compose up`
+3. `docker-compose exec web bundle install`(In case there are new gems)
