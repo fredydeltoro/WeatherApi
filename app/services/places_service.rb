@@ -9,8 +9,16 @@ module PlacesService
 
     response = connection.get
 
-    returns nil unless response.success?
+    return nil unless response.success?
 
-    JSON.parse(response.body)
+    body = JSON.parse(response.body)
+
+    map_places = body.map do |place|
+      daily_temp = WeatherService.get_temperature_by_cordinates(place['lat'], place['long'])
+      place['daily_temp'] = daily_temp
+      place
+    end
+
+    map_places
   end
 end
