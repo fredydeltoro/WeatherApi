@@ -221,6 +221,7 @@ PLATFORMS
 
 DEPENDENCIES
   bootsnap
+  concurrent-ruby
   debug
   faraday (~> 1.5)
   puma (= 5.3.2)

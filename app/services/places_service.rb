@@ -13,11 +13,20 @@ module PlacesService
 
     body = JSON.parse(response.body)
 
-    map_places = body.map do |place|
-      daily_temp = WeatherService.get_temperature_by_cordinates(place['lat'], place['long'])
-      place['daily_temp'] = daily_temp
-      place
+    # Array to collect results in parallel
+    map_places = Concurrent::Array.new
+
+    # Make requests in parallel
+    promises = body.map do |place|
+      Concurrent::Promise.execute do
+        daily_temp = WeatherService.get_temperature_by_cordinates(place['lat'], place['long'])
+        place['daily_temp'] = daily_temp
+        map_places << place
+      end
     end
+
+    # Await for all promises are completed
+    Concurrent::Promise.zip(*promises).wait
 
     map_places
   end
