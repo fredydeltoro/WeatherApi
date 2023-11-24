@@ -13,7 +13,7 @@ module WeatherService
       req.params['lon'] = lon
     end
 
-    returns nil unless response.success?
+    return nil unless response.success?
 
     body = JSON.parse(response.body)
 
