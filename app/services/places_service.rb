@@ -1,13 +1,13 @@
 module PlacesService
   BASE_URL = 'https://search.reservamos.mx/api/v2/places'.freeze
+  CONNECTION = Faraday.new(BASE_URL) do |conn|
+    conn.adapter Faraday.default_adapter
+  end
 
   def self.get_places(query)
-    connection = Faraday.new(BASE_URL) do |conn|
-      conn.params['q'] = query
-      conn.adapter Faraday.default_adapter
+    response = CONNECTION.get do |req|
+      req.params['q'] = query
     end
-
-    response = connection.get
 
     return nil unless response.success?
 
