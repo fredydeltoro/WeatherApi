@@ -8,4 +8,5 @@ Rails.application.routes.draw do
   # root "posts#index"
 
   get '/api/health', to: "api#check"
+  get '/api/weather_by_place', to: "api#weather_by_place"
 end
