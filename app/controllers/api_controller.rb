@@ -9,4 +9,20 @@ class ApiController < ApplicationController
       'environment' => Rails.env
     }    
   end
+
+  def weather_by_place
+    places = fetch_place_and_temp(params[:query])
+
+    if places
+      render json: places
+    else
+      render json: { error: 'Unable to get places and temperature at this moment.' }, status: :unprocessable_entity
+    end
+  end
+
+  private
+
+  def fetch_place_and_temp(query)
+    PlacesService.get_places(query)
+  end
 end
